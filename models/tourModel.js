@@ -84,7 +84,36 @@ const toursSchema = new mongoose.Schema(
     secretTour: {
       type: Boolean,
       default: false
-    }
+    },
+    startLocation: {
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point']
+      },
+      coordinates: [Number],
+      address: String,
+      description: String
+    },
+    locations: [
+      {
+        type: {
+          type: String,
+          default: 'Point',
+          enum: ['Point']
+        },
+        coordinates: [Number],
+        address: String,
+        description: String,
+        day: Number
+      }
+    ],
+    guides: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+      }
+    ]
   },
   {
     toJSON: {
@@ -96,15 +125,34 @@ const toursSchema = new mongoose.Schema(
   }
 );
 
+toursSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'tour',
+  localField: '_id'
+});
+
 toursSchema.virtual('durationWeeks').get(function() {
   return this.duration / 7;
 });
 //DOCUMENT MIDDLEWARE RUNS BEFORE SAVE() AND CREATE()
 toursSchema.pre('save', function(next) {
-  console.log('from save middleware');
   this.slug = slugify(this.name, { lower: true });
   next();
 });
+
+toursSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangeAt'
+  });
+  next(0);
+});
+
+// toursSchema.pre('save', async function(next) {
+//   const guidesPromises = this.guides.map(async id => await User.findById(id));
+//   this.guides = await Promise.all(guidesPromises);
+//   next();
+// });
 
 // toursSchema.pre('save', function(next) {
 //   console.log('Will Save Document');
