@@ -15,6 +15,7 @@ const bookTour = async tourId => {
       sessionId: data.session.id
     });
   } catch (err) {
+    console.log(err);
     showAlert('error', err);
   }
 };
@@ -54,6 +55,7 @@ const login = async (email, password) => {
 
     const data = await res.json();
   } catch (err) {
+    console.log(err);
     showAlert('error', err);
   }
 };
@@ -77,6 +79,7 @@ const signup = async payload => {
 
     const data = await res.json();
   } catch (err) {
+    console.log(err);
     showAlert('error', err);
   }
 };
@@ -91,6 +94,7 @@ const logout = async () => {
     location.assign('/');
     const data = await res.json();
   } catch (err) {
+    console.log(err);
     showAlert('error', 'Error logging out! Try again.');
   }
 };
@@ -116,6 +120,7 @@ const updateSettings = async (payload, type) => {
       showAlert('success', `${type} updated successfully!`);
     }
   } catch (err) {
+    console.log(err);
     showAlert('error', err.message);
   }
 };
