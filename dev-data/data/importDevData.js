@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const Tour = require('../../models/tourModel');
-const Review = require('../../models/reviewModel');
+const Review = require('../../models/ReviewModel');
 const User = require('../../models/userModel');
 
 dotenv.config({

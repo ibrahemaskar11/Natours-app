@@ -2,7 +2,7 @@ const stripe = require('stripe')(
   'sk_test_51Mb3uXCt6AIji4auHEDrJ71ZwWyxFShijmSRxeTyjHHB7mqYmkA9l6igTO6R5yEGf3LlxrGVtalwGTQfZGGp6kU400vtBpapYj'
 );
 const Tour = require('../models/tourModel');
-const Booking = require('../models/bookingModel');
+const Booking = require('../models/BookingModel');
 const factory = require('./handlerFactory');
 
 exports.getCheckoutSession = async (req, res, next) => {
