@@ -77,7 +77,6 @@ exports.updateMe = async (req, res, next) => {
   try {
     const filteredBody = filterObj(req.body, 'name', 'email');
     if (req.file) filteredBody.photo = req.file.filename;
-    console.log(filteredBody);
     const updatedUser = await User.findByIdAndUpdate(
       req.user.id,
       filteredBody,
@@ -93,13 +92,11 @@ exports.updateMe = async (req, res, next) => {
       }
     });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
 exports.deleteMe = async (req, res, next) => {
   try {
-    console.log(req.user);
     await User.findByIdAndUpdate(req.user.id, {
       active: false
     });

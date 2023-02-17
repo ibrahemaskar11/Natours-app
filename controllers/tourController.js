@@ -59,7 +59,6 @@ exports.resizeTourImages = async (req, res, next) => {
 };
 
 exports.aliasTopTours = async (req, res, next) => {
-  console.log('from the alias middleware');
   req.query.limit = '5';
   req.query.sort = '-ratingsAverage,price';
   req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
@@ -129,7 +128,6 @@ exports.getToursStats = async (req, res, next) => {
       //   $match: { _id: { $ne: 'EASY' } }
       // }
     ]);
-    console.log(stats);
     res.status(200).json({
       status: 'Success',
       data: stats

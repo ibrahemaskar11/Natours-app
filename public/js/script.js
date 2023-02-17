@@ -5,20 +5,16 @@ const stripe = Stripe(
 
 const bookTour = async tourId => {
   try {
-    const res = await fetch(
-      `http://localhost:5000/api/v1/bookings/checkout-session/${tourId}`
-    );
+    const res = await fetch(`/api/v1/bookings/checkout-session/${tourId}`);
     if (!res.ok) {
       err = await res.json();
       throw new Error(err.message);
     }
     const data = await res.json();
-    console.log(data);
     await stripe.redirectToCheckout({
       sessionId: data.session.id
     });
   } catch (err) {
-    console.log(err);
     showAlert('error', err);
   }
 };
@@ -37,7 +33,7 @@ const showAlert = (type, msg) => {
 
 const login = async (email, password) => {
   try {
-    const res = await fetch('http://localhost:5000/api/v1/users/login', {
+    const res = await fetch('/api/v1/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -51,21 +47,19 @@ const login = async (email, password) => {
       const data = await res.json();
       throw new Error(data.message);
     }
-    console.log(res);
     showAlert('success', 'Logged in successfully!');
     window.setTimeout(() => {
       location.assign('/');
     }, 1000);
 
     const data = await res.json();
-    console.log(data);
   } catch (err) {
     showAlert('error', err);
   }
 };
 const signup = async payload => {
   try {
-    const res = await fetch('http://localhost:5000/api/v1/users/signup', {
+    const res = await fetch('/api/v1/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -76,14 +70,12 @@ const signup = async payload => {
       const data = await res.json();
       throw new Error(data.message);
     }
-    console.log(res);
     showAlert('success', 'Logged in successfully!');
     window.setTimeout(() => {
       location.assign('/');
     }, 1000);
 
     const data = await res.json();
-    console.log(data);
   } catch (err) {
     showAlert('error', err);
   }
@@ -91,15 +83,14 @@ const signup = async payload => {
 
 const logout = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/v1/users/logout');
+    const res = await fetch('/api/v1/users/logout');
     if (!res.ok) {
       const data = await res.json();
       throw new Error(data.message);
     }
-    location.assign('http://localhost:5000/');
+    location.assign('/');
     const data = await res.json();
   } catch (err) {
-    console.log(err);
     showAlert('error', 'Error logging out! Try again.');
   }
 };
@@ -107,8 +98,8 @@ const logout = async () => {
 const updateSettings = async (payload, type) => {
   const url =
     type === 'password'
-      ? 'http://localhost:5000/api/v1/users/updatePassword'
-      : 'http://localhost:5000/api/v1/users/updateMe';
+      ? '/api/v1/users/updatePassword'
+      : '/api/v1/users/updateMe';
   const method = type === 'password' ? 'POST' : 'PATCH';
   try {
     const res = await fetch(url, {
@@ -117,17 +108,14 @@ const updateSettings = async (payload, type) => {
     });
     if (!res.ok) {
       const data = await res.json();
-      console.log(data);
 
       throw new Error(data.message);
     }
     const data = await res.json();
-    console.log(data);
     if (data.status === 'Success') {
       showAlert('success', `${type} updated successfully!`);
     }
   } catch (err) {
-    console.log(err);
     showAlert('error', err.message);
   }
 };
@@ -140,7 +128,6 @@ const updatePasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 
 if (loginForm) {
-  console.log('login');
   loginForm.addEventListener('submit', e => {
     e.preventDefault();
     const email = document.getElementById('email').value;
@@ -177,7 +164,6 @@ if (logoutBtn) {
 if (updateDataForm) {
   updateDataForm.addEventListener('submit', e => {
     e.preventDefault();
-    console.log('submitted');
     const form = new FormData();
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
@@ -255,7 +241,6 @@ const displayMap = locations => {
 const mapBox = document.getElementById('map');
 if (mapBox) {
   const locations = JSON.parse(mapBox.dataset.locations);
-  console.log(locations);
   displayMap(locations);
 }
 
