@@ -608,6 +608,16 @@ body {
   -ms-scroll-snap-type: x mandatory;
   scroll-snap-type: x mandatory;
 }
+.reviews::-webkit-scrollbar {
+  /* WebKit */
+  margin: 0 20px;
+  width: 2px;
+  height: 5px;
+  background-color: #fff;
+}
+.reviews::-webkit-scrollbar-thumb {
+  background: #222;
+}
 .reviews__card {
   width: 30rem;
   padding: 4rem;
@@ -830,6 +840,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  justify-content: flex-end;
 }
 .footer__nav li {
   margin-left: 1.5rem;

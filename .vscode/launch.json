@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "type": "chrome",
+      "name": "http://\"Error\\n    at model.Query._wrappedThunk [as _findOne] (C:\\\\courses\\\\Learning Node\\\\Natours-app\\\\node_modules\\\\mongoose\\\\lib\\\\helpers\\\\query\\\\wrapThunk.js:27:28)\\n    at C:\\\\courses\\\\Learning Node\\\\Natours-app\\\\node_modules\\\\kareem\\\\index.js:334:18\\n    at _next (C:\\\\courses\\\\Learning Node\\\\Natours-app\\\\node_modules\\\\kareem\\\\index.js:128:16)\\n    at C:\\\\courses\\\\Learning Node\\\\Natours-app\\\\node_modules\\\\kareem\\\\index.js:555:30\\n    at processTicksAndRejections (node:internal/process/task_queues:78:11)",
+      "request": "launch",
+      "url": "http://\"Error\\n    at model.Query._wrappedThunk [as _findOne] (C:\\\\courses\\\\Learning Node\\\\Natours-app\\\\node_modules\\\\mongoose\\\\lib\\\\helpers\\\\query\\\\wrapThunk.js:27:28)\\n    at C:\\\\courses\\\\Learning Node\\\\Natours-app\\\\node_modules\\\\kareem\\\\index.js:334:18\\n    at _next (C:\\\\courses\\\\Learning Node\\\\Natours-app\\\\node_modules\\\\kareem\\\\index.js:128:16)\\n    at C:\\\\courses\\\\Learning Node\\\\Natours-app\\\\node_modules\\\\kareem\\\\index.js:555:30\\n    at processTicksAndRejections (node:internal/process/task_queues:78:11)"
+    }
+  ]
+}

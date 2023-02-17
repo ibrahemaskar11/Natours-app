@@ -1,13 +1,29 @@
 const Review = require('../models/ReviewModel');
+const factory = require('./handlerFactory');
+const AppError = require('../utils/appError');
 
-exports.getAllReviews = async (req, res, next) => {
+exports.setTourUserIds = (req, res, next) => {
+  if (!req.body.tour) req.body.tour = req.params.tourId;
+  if (!req.body.author) req.body.author = req.user.id;
+  next();
+};
+
+exports.getAllReviews = factory.getAll(Review);
+exports.createReview = factory.createOne(Review);
+exports.updateReview = async (req, res, next) => {
   try {
-    const reviews = await Review.find();
+    const doc = await Review.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
+    if (!doc) {
+      return next(new AppError('No document found with that ID', 404));
+    }
+    await Review.calcAverageRatings(doc.tour);
     res.status(200).json({
       status: 'Success',
-      results: reviews.length,
       data: {
-        reviews
+        data: doc
       }
     });
   } catch (err) {
@@ -15,16 +31,21 @@ exports.getAllReviews = async (req, res, next) => {
   }
 };
 
-exports.createReview = async (req, res, next) => {
+exports.deleteReivew = async (req, res, next) => {
   try {
-    const newReview = await Review.create(req.body);
-    res.status(201).json({
+    const doc = await Review.findById(req.params.id);
+    if (!doc) {
+      return next(new AppError('No document found with that ID', 404));
+    }
+    const { tour } = doc;
+    await Review.findByIdAndDelete(doc.id);
+    await Review.calcAverageRatings(tour);
+    res.status(204).json({
       status: 'Success',
-      data: {
-        newReview
-      }
+      data: null
     });
   } catch (err) {
     next(err);
   }
 };
+exports.getReview = factory.getOne(Review);
