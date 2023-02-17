@@ -16,6 +16,7 @@ const db = process.env.MONGO_URI.replace(
   '<PASSWORD>',
   process.env.MONGO_PASSWORD
 );
+mongoose.set('strictQuery', false);
 mongoose
   .connect(db, {
     useNewUrlParser: true
