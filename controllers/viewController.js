@@ -1,7 +1,7 @@
-const Tour = require('../models/TourModel.js');
+const Tour = require('../models/tourModel');
 const AppError = require('./../utils/appError');
-const User = require('../models/UserModel');
-const Booking = require('../models/BookingModel');
+const User = require('../models/userModel');
+const Booking = require('../models/bookingModel');
 
 exports.getOverview = async (req, res, next) => {
   try {

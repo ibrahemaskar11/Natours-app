@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 const bookingSchema = new mongoose.Schema({
   tour: {
     type: mongoose.Schema.ObjectId,
-    reference: 'Tour',
+    ref: 'Tour',
     required: [true, 'Booking must belong to a Tour!']
   },
   user: {
     type: mongoose.Schema.ObjectId,
-    reference: 'User',
+    ref: 'User',
     required: [true, 'Booking must belong to a User!']
   },
   price: {
     type: Number,
-    required: [true, 'Booking must have a price']
+    require: [true, 'Booking must have a price.']
   },
   createdAt: {
     type: Date,
