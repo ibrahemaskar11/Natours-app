@@ -15,7 +15,7 @@ const bookTour = async tourId => {
       sessionId: data.session.id
     });
   } catch (err) {
-    showAlert('error', err);
+    showAlert('error', 'Something went wrong');
   }
 };
 
@@ -54,30 +54,30 @@ const login = async (email, password) => {
 
     const data = await res.json();
   } catch (err) {
-    showAlert('error', err);
+    showAlert('error', 'Email or password are incorrect');
   }
 };
-const signup = async payload => {
+const signup = async (name, email, password, passwordConfirm) => {
   try {
-    const res = await fetch('/api/v1/users/signup', {
+    const res = await axios({
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
+      url: '/api/v1/users/signup',
+      data: {
+        name,
+        email,
+        password,
+        passwordConfirm
+      }
     });
-    if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.message);
-    }
-    showAlert('success', 'Logged in successfully!');
-    window.setTimeout(() => {
-      location.assign('/');
-    }, 1000);
 
-    const data = await res.json();
+    if (res.data.status === 'success') {
+      showAlert('success', 'signed up in successfully!');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1000);
+    }
   } catch (err) {
-    showAlert('error', err);
+    showAlert('error', err.response.data.message);
   }
 };
 
@@ -145,12 +145,7 @@ if (signupForm) {
     const password = document.getElementById('password-signup').value;
     const passwordConfirm = document.getElementById('confirm-password-signup')
       .value;
-    await signup({
-      email,
-      name,
-      password,
-      passwordConfirm
-    });
+    await signup(name, email, password, passwordConfirm);
     document.querySelector('.btn-signup').textContent = 'Sign up';
   });
 }
@@ -162,14 +157,15 @@ if (logoutBtn) {
 }
 
 if (updateDataForm) {
-  updateDataForm.addEventListener('submit', e => {
+  updateDataForm.addEventListener('submit', async e => {
     e.preventDefault();
     const form = new FormData();
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
 
-    updateSettings(form, 'data');
+    await updateSettings(form, 'data');
+    location.assign('/me');
   });
 }
 if (updatePasswordForm) {
