@@ -29,7 +29,8 @@ const scriptSrcUrls = [
   'https://api.mapbox.com/',
   'https://js.stripe.com/v3/',
   'https://*.stripe.com',
-  'https://checkout.stripe.com'
+  'https://checkout.stripe.com',
+  'https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js'
 ];
 const styleSrcUrls = [
   'https://api.mapbox.com/',

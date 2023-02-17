@@ -20,6 +20,7 @@ exports.getTour = async (req, res, next) => {
     path: 'reviews',
     fields: 'review rating author'
   });
+  console.log(tour);
   if (!tour) return next(new AppError('There is no tour with that name', 404));
   try {
     res.status(200).render('tour', {

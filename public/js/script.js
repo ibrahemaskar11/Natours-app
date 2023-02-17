@@ -5,7 +5,9 @@ const stripe = Stripe(
 
 const bookTour = async tourId => {
   try {
-    const res = await fetch(`/api/v1/bookings/checkout-session/${tourId}`);
+    const res = await fetch(
+      `http://localhost:5000/api/v1/bookings/checkout-session/${tourId}`
+    );
     if (!res.ok) {
       err = await res.json();
       throw new Error(err.message);
@@ -15,7 +17,6 @@ const bookTour = async tourId => {
       sessionId: data.session.id
     });
   } catch (err) {
-    console.log(err);
     showAlert('error', err);
   }
 };
@@ -34,7 +35,7 @@ const showAlert = (type, msg) => {
 
 const login = async (email, password) => {
   try {
-    const res = await fetch('/api/v1/users/login', {
+    const res = await fetch('http://localhost:5000/api/v1/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -55,13 +56,12 @@ const login = async (email, password) => {
 
     const data = await res.json();
   } catch (err) {
-    console.log(err);
     showAlert('error', err);
   }
 };
 const signup = async payload => {
   try {
-    const res = await fetch('/api/v1/users/signup', {
+    const res = await fetch('http://localhost:5000/api/v1/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -79,22 +79,20 @@ const signup = async payload => {
 
     const data = await res.json();
   } catch (err) {
-    console.log(err);
     showAlert('error', err);
   }
 };
 
 const logout = async () => {
   try {
-    const res = await fetch('/api/v1/users/logout');
+    const res = await fetch('http://localhost:5000/api/v1/users/logout');
     if (!res.ok) {
       const data = await res.json();
       throw new Error(data.message);
     }
-    location.assign('/');
+    location.assign('http://localhost:5000/');
     const data = await res.json();
   } catch (err) {
-    console.log(err);
     showAlert('error', 'Error logging out! Try again.');
   }
 };
@@ -102,8 +100,8 @@ const logout = async () => {
 const updateSettings = async (payload, type) => {
   const url =
     type === 'password'
-      ? '/api/v1/users/updatePassword'
-      : '/api/v1/users/updateMe';
+      ? 'http://localhost:5000/api/v1/users/updatePassword'
+      : 'http://localhost:5000/api/v1/users/updateMe';
   const method = type === 'password' ? 'POST' : 'PATCH';
   try {
     const res = await fetch(url, {
@@ -120,7 +118,6 @@ const updateSettings = async (payload, type) => {
       showAlert('success', `${type} updated successfully!`);
     }
   } catch (err) {
-    console.log(err);
     showAlert('error', err.message);
   }
 };
