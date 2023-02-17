@@ -33,30 +33,26 @@ const showAlert = (type, msg) => {
 
 const login = async (email, password) => {
   try {
-    const res = await fetch('/api/v1/users/login', {
+    const res = await axios({
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+      url: '/api/v1/users/login',
+      data: {
         email,
         password
-      })
+      }
     });
-    if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.message);
-    }
-    showAlert('success', 'Logged in successfully!');
-    window.setTimeout(() => {
-      location.assign('/');
-    }, 1000);
 
-    const data = await res.json();
+    if (res.data.status === 'success') {
+      showAlert('success', 'Logged in successfully!');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1500);
+    }
   } catch (err) {
-    showAlert('error', 'Email or password are incorrect');
+    showAlert('error', err.response.data.message);
   }
 };
+
 const signup = async (name, email, password, passwordConfirm) => {
   try {
     const res = await axios({
