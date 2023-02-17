@@ -1,9 +1,9 @@
 const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const AppError = require('../utils/appError');
-const User = require('../models/userModel');
-const Email = require('../utils/email');
+const AppError = require('./../utils/appError');
+const User = require('./../models/userModel');
+const Email = require('./../utils/email');
 
 const signToken = id => {
   return jwt.sign(
@@ -112,7 +112,7 @@ exports.protect = async (req, res, next) => {
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
+./    if (!roles.includes(req.user.role)) {
       return next(
         new AppError('You do not have permission to preform this action', 403)
       );

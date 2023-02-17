@@ -1,6 +1,6 @@
-const Review = require('../models/reviewModel');
+const Review = require('./../models/reviewModel');
 const factory = require('./handlerFactory');
-const AppError = require('../utils/appError');
+const AppError = require('./../utils/appError');
 
 exports.setTourUserIds = (req, res, next) => {
   if (!req.body.tour) req.body.tour = req.params.tourId;
@@ -23,7 +23,7 @@ exports.updateReview = async (req, res, next) => {
     res.status(200).json({
       status: 'Success',
       data: {
-        data: doc
+        data: doc./
       }
     });
   } catch (err) {

@@ -1,4 +1,4 @@
-const AppError = require('../utils/appError');
+const AppError = require('./../utils/appError');
 const APIFeatures = require('./../utils/apiFeatures');
 
 exports.deleteOne = Model => {
