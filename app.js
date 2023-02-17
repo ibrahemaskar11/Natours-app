@@ -22,6 +22,7 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, `/public`)));
+app.use(require('cors')());
 
 const scriptSrcUrls = [
   'https://api.tiles.mapbox.com/',
