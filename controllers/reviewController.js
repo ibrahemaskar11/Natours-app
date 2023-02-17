@@ -23,7 +23,7 @@ exports.updateReview = async (req, res, next) => {
     res.status(200).json({
       status: 'Success',
       data: {
-        data: doc./
+        data: doc
       }
     });
   } catch (err) {

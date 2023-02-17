@@ -41,7 +41,7 @@ exports.getCheckoutSession = async (req, res, next) => {
   }
 };
 
-exports.createBooking./Checkout = async (req, res, next) => {
+exports.createBookingCheckout = async (req, res, next) => {
   try {
     const { tour, user, price } = req.query;
     if (!tour && !user && !price) return next();
