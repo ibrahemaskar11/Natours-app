@@ -1,7 +1,7 @@
 const multer = require('multer');
 const sharp = require('sharp');
-const User = require('../models/UserModel');
-const AppError = require('../utils/appError');
+const User = require('./../models/UserModel');
+const AppError = require('./../utils/appError');
 const factory = require('./handlerFactory');
 // const multerStorage = multer.diskStorage({
 //   destination: (req, file, cb) => {
