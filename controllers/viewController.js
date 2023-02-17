@@ -1,4 +1,4 @@
-const Tour = require('../models/TourModel');
+const Tour = require('../models/TourModel.js');
 const AppError = require('./../utils/appError');
 const User = require('../models/UserModel');
 const Booking = require('../models/BookingModel');
