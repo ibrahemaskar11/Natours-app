@@ -5,9 +5,7 @@ const stripe = Stripe(
 
 const bookTour = async tourId => {
   try {
-    const res = await fetch(
-      `http://localhost:5000/api/v1/bookings/checkout-session/${tourId}`
-    );
+    const res = await fetch(`/api/v1/bookings/checkout-session/${tourId}`);
     if (!res.ok) {
       err = await res.json();
       throw new Error(err.message);
@@ -35,7 +33,7 @@ const showAlert = (type, msg) => {
 
 const login = async (email, password) => {
   try {
-    const res = await fetch('http://localhost:5000/api/v1/users/login', {
+    const res = await fetch('/api/v1/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -61,7 +59,7 @@ const login = async (email, password) => {
 };
 const signup = async payload => {
   try {
-    const res = await fetch('http://localhost:5000/api/v1/users/signup', {
+    const res = await fetch('/api/v1/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -85,12 +83,12 @@ const signup = async payload => {
 
 const logout = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/v1/users/logout');
+    const res = await fetch('/api/v1/users/logout');
     if (!res.ok) {
       const data = await res.json();
       throw new Error(data.message);
     }
-    location.assign('http://localhost:5000/');
+    location.assign('/');
     const data = await res.json();
   } catch (err) {
     showAlert('error', 'Error logging out! Try again.');
@@ -100,8 +98,8 @@ const logout = async () => {
 const updateSettings = async (payload, type) => {
   const url =
     type === 'password'
-      ? 'http://localhost:5000/api/v1/users/updatePassword'
-      : 'http://localhost:5000/api/v1/users/updateMe';
+      ? '/api/v1/users/updatePassword'
+      : '/api/v1/users/updateMe';
   const method = type === 'password' ? 'POST' : 'PATCH';
   try {
     const res = await fetch(url, {
