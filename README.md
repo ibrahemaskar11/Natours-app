@@ -164,6 +164,28 @@ $ npm i eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-con
 eslint-plugin-import eslint-plugin-jsx-a11y  eslint-plugin-react --save-dev
 ```
 
+## Config example
+
+```
+NODE_ENV=
+port=
+MONGO_URI=
+MONGO_LOCAL=
+MONGO_PASSWORD=
+JWT_SECRET=
+JWT_EXPIRES_IN=
+JWT_COOKIE_EXPIRES_IN=
+EMAIL_USERNAME=
+EMAIL_PASSWORD=
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_FROM=
+SENDGRID_USERNAME=
+SENDGRID_PASSWORD=
+STRIPE_PUBLIC_KEY=
+STRIPE_SECRET_KEY=
+
+```
 ## Acknowledgement
 
 - This project is part of the online course I've taken at Udemy. Thanks to Jonas Schmedtmann for creating this awesome course! Link to the course: [Node.js, Express, MongoDB & More: The Complete Bootcamp 2019](https://www.udemy.com/course/nodejs-express-mongodb-bootcamp/)
